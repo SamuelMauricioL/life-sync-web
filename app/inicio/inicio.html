@@ -17,77 +17,60 @@
 
   <main class="dash-container">
 
-    <!-- Saludo -->
+    <!-- Header -->
     <div class="dash-header">
       <div>
-        <h1 class="dash-greeting">¡Bienvenido/a, <span id="dash-usuario">Invitado</span>!</h1>
+        <h1 class="dash-greeting">¡Buenos días, <span id="dash-usuario">Invitado</span>!</h1>
         <p class="dash-date" id="dash-fecha"></p>
       </div>
       <div class="dash-user-badge">
-        <span id="dash-avatar">👤</span>
+        <span>👤</span>
         <select id="dash-selector-usuario" onchange="cambiarUsuario(this.value)">
           <option value="">Seleccionar usuario</option>
         </select>
       </div>
     </div>
 
-    <!-- Resumen rápido -->
-    <div class="dash-summary">
-      <div class="summary-card" id="summary-tareas">
-        <span class="summary-icon">📋</span>
-        <div>
-          <span class="summary-count" id="count-tareas">0</span>
-          <span class="summary-label">Tareas hoy</span>
-        </div>
+    <!-- Ánimo matutino inline -->
+    <section class="mood-section">
+      <h2>¿Cómo amaneces hoy?</h2>
+      <div class="mood-row" id="mood-row">
+        <button class="mood-btn" data-mood="feliz">😊</button>
+        <button class="mood-btn" data-mood="motivado">🔥</button>
+        <button class="mood-btn" data-mood="calmado">😌</button>
+        <button class="mood-btn" data-mood="ansioso">😰</button>
+        <button class="mood-btn" data-mood="cansado">😴</button>
+        <button class="mood-btn" data-mood="triste">😢</button>
       </div>
-      <div class="summary-card" id="summary-emociones">
-        <span class="summary-icon">💜</span>
-        <div>
-          <span class="summary-count" id="count-emociones">0</span>
-          <span class="summary-label">Emociones esta semana</span>
-        </div>
-      </div>
-      <div class="summary-card" id="summary-historial">
-        <span class="summary-icon">📊</span>
-        <div>
-          <span class="summary-count" id="count-historial">0</span>
-          <span class="summary-label">Días con registro</span>
-        </div>
-      </div>
-      <div class="summary-card" id="summary-horario">
-        <span class="summary-icon">📅</span>
-        <div>
-          <span class="summary-count">1</span>
-          <span class="summary-label">Horario</span>
-        </div>
+      <p class="mood-feedback" id="mood-feedback"></p>
+    </section>
+
+    <!-- Racha (solo visible si ya registró ánimo hoy) -->
+    <div class="dash-streak" id="dash-streak" style="display:none;">
+      <span class="streak-fire" id="streak-emoji">🔥</span>
+      <div>
+        <span class="streak-count" id="streak-count">0</span>
+        <span class="streak-label">días seguidos</span>
       </div>
     </div>
 
     <!-- Acceso rápido -->
     <h2 class="dash-section-title">Acceso rápido</h2>
     <div class="dash-actions">
-      <a href="/app/planificacion/tareas/tareas.html" class="action-card">
+      <a href="/app/planificar/planificar.html" class="action-card">
         <span class="action-icon">📋</span>
-        <span class="action-label">Nueva tarea</span>
+        <span class="action-label">Planificar</span>
       </a>
-      <a href="/app/planificacion/horario/horario.html" class="action-card">
-        <span class="action-icon">📅</span>
-        <span class="action-label">Ver horario</span>
-      </a>
-      <a href="/app/emociones/registrar/registrar.html" class="action-card">
+      <a href="/app/bienestar/historial/historial.html" class="action-card">
         <span class="action-icon">💜</span>
-        <span class="action-label">Registrar emoción</span>
-      </a>
-      <a href="/app/emociones/historial/historial.html" class="action-card">
-        <span class="action-icon">📊</span>
-        <span class="action-label">Mi historial</span>
+        <span class="action-label">Mi bienestar</span>
       </a>
     </div>
 
     <!-- Próximas tareas -->
     <h2 class="dash-section-title">Próximas tareas</h2>
     <div class="dash-reminders" id="dash-reminders">
-      <p class="empty-state" id="empty-reminders">No hay tareas pendientes ✨</p>
+      <p class="empty-state">No hay tareas pendientes ✨</p>
       <div id="reminders-list"></div>
     </div>
 

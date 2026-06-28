@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planificar — LifeSync</title>
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="planificar.css">
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <main class="page-content-wide">
+    <div class="page-header">
+      <h1>📋 Planificar</h1>
+      <p class="subtitulo">Organiza tus tareas académicas y personales.</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="plan-tabs">
+      <button class="tab-btn active" data-tab="crear">✏️ Crear tarea</button>
+      <button class="tab-btn" data-tab="semana">📅 Vista semanal</button>
+    </div>
+
+    <!-- Tab: Crear tarea -->
+    <div class="tab-content active" id="tab-crear">
+      <form id="form-tarea">
+        <div class="form-row two">
+          <div class="form-group">
+            <label>📌 Nombre</label>
+            <input type="text" id="tarea-nombre" placeholder="Ej: Exposición de Ciencias" required>
+          </div>
+          <div class="form-group">
+            <label>📂 Categoría</label>
+            <select id="tarea-categoria">
+              <option value="estudio">📚 Estudio</option>
+              <option value="habito">💧 Hábito</option>
+              <option value="meta">🎯 Meta personal</option>
+              <option value="salud">🏥 Salud</option>
+              <option value="social">👥 Social</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row three">
+          <div class="form-group">
+            <label>📅 Fecha</label>
+            <input type="date" id="tarea-fecha" required>
+          </div>
+          <div class="form-group">
+            <label>⏰ Hora</label>
+            <input type="time" id="tarea-hora">
+          </div>
+          <div class="form-group">
+            <label>🎯 Prioridad</label>
+            <select id="tarea-prioridad">
+              <option value="baja">🟢 Baja</option>
+              <option value="media" selected>🟡 Media</option>
+              <option value="alta">🔴 Alta</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>📝 Descripción</label>
+          <textarea id="tarea-desc" rows="3" placeholder="Detalles de la tarea..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-block">💜 Guardar tarea</button>
+      </form>
+
+      <!-- Últimas creadas -->
+      <div class="recent-section">
+        <h3>Últimas tareas</h3>
+        <div id="recent-tareas"></div>
+      </div>
+    </div>
+
+    <!-- Tab: Vista semanal -->
+    <div class="tab-content" id="tab-semana">
+      <div class="semana-info" id="semana-info"></div>
+      <div class="horario-grid" id="horario-grid"></div>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="/assets/js/storage.js"></script>
+  <script src="/assets/js/app.js"></script>
+  <script src="planificar.js"></script>
+
+</body>
+</html>

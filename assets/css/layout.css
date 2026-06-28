@@ -1,5 +1,6 @@
 /* ============================================
-   LifeSync — Layout (Header, Nav, Footer, Grid)
+   LifeSync — Layout Global para páginas de la app
+   Sin cards flotantes. Contenido a ancho completo.
    ============================================ */
 
 /* Fondo gradiente para páginas de la app */
@@ -7,44 +8,24 @@ body {
   background: linear-gradient(to right, #8b5cf6, #3b82f6, #14b8a6);
 }
 
-/* ---------- CONTENEDOR PRINCIPAL ---------- */
-.contenedor {
-  width: 80%;
-  max-width: 950px;
-  margin: 40px auto;
-  background-color: var(--color-white);
-  padding: 40px;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
+/* Contenedor de contenido: sin card, solo padding + centrado */
+.page-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px 24px;
+  background: rgba(255,255,255,0.92);
+  min-height: calc(100vh - 80px);
+  border-radius: 0;
 }
 
-.contenedor-wide {
-  width: 85%;
+/* Para páginas que necesitan más ancho (planificar, historial) */
+.page-content-wide {
   max-width: 1100px;
-  margin: 40px auto;
-  background-color: var(--color-white);
-  padding: 40px;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
-  text-align: center;
-}
-
-.contenedor-narrow {
-  width: 75%;
-  max-width: 900px;
-  margin: 40px auto;
-  background-color: var(--color-white);
-  padding: 40px;
-  border-radius: var(--radius-lg);
-  text-align: center;
-}
-
-/* ---------- CENTER WRAPPER ---------- */
-.center-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  margin: 0 auto;
+  padding: 30px 24px;
+  background: rgba(255,255,255,0.92);
+  min-height: calc(100vh - 80px);
+  border-radius: 0;
 }
 
 /* ---------- NAVBAR ---------- */
@@ -119,17 +100,6 @@ body {
   text-align: center;
   color: var(--color-white);
   padding-top: 20px;
-}
-
-/* ---------- CONTENEDOR FINAL (GRACIAS) ---------- */
-.final-card {
-  width: 70%;
-  max-width: 700px;
-  margin: 80px auto;
-  background-color: var(--color-white);
-  padding: 50px;
-  border-radius: var(--radius-lg);
-  text-align: center;
 }
 
 /* ---------- ALERTA ---------- */
