@@ -1,0 +1,20 @@
+/* ============================================
+   LifeSync — Juego: Dispara al Objetivo
+   ============================================ */
+
+body {
+  overflow: hidden;
+}
+
+#objetivo {
+  position: absolute;
+  font-size: 70px;
+  cursor: pointer;
+  user-select: none;
+}
+
+#final {
+  display: none;
+  margin-top: 100px;
+  font-size: 30px;
+}

@@ -1,0 +1,10 @@
+[
+  { "id": "feliz", "emoji": "😊", "nombre": "Feliz", "color": "#fbbf24" },
+  { "id": "triste", "emoji": "😢", "nombre": "Triste", "color": "#60a5fa" },
+  { "id": "enojado", "emoji": "😠", "nombre": "Enojado/a", "color": "#ef4444" },
+  { "id": "ansioso", "emoji": "😰", "nombre": "Ansioso/a", "color": "#a78bfa" },
+  { "id": "calmado", "emoji": "😌", "nombre": "Calmado/a", "color": "#34d399" },
+  { "id": "emocionado", "emoji": "🤩", "nombre": "Emocionado/a", "color": "#f472b6" },
+  { "id": "cansado", "emoji": "😴", "nombre": "Cansado/a", "color": "#9ca3af" },
+  { "id": "agradecido", "emoji": "🙏", "nombre": "Agradecido/a", "color": "#f97316" }
+]

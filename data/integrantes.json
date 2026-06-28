@@ -1,0 +1,26 @@
+[
+  {
+    "nombre": "Naomi Miranda Rafael",
+    "rol": "Integrante",
+    "color": "#8b5cf6",
+    "modulos": ["rutinas", "emociones", "recordatorios"]
+  },
+  {
+    "nombre": "Paola Pompa Rojas",
+    "rol": "Integrante",
+    "color": "#3b82f6",
+    "modulos": ["recordatorios", "horario"]
+  },
+  {
+    "nombre": "Kathe Cruz Caranza",
+    "rol": "Integrante",
+    "color": "#14b8a6",
+    "modulos": ["emociones", "recordatorios", "equipo"]
+  },
+  {
+    "nombre": "Angeles Ponce Ramirez",
+    "rol": "Integrante",
+    "color": "#f59e0b",
+    "modulos": ["dashboard", "emociones", "recordatorios", "rutinas"]
+  }
+]

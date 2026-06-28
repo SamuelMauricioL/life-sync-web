@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio — LifeSync</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="inicio.css">
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <main class="dash-container">
+
+    <!-- Saludo -->
+    <div class="dash-header">
+      <div>
+        <h1 class="dash-greeting">¡Bienvenido/a, <span id="dash-usuario">Invitado</span>!</h1>
+        <p class="dash-date" id="dash-fecha"></p>
+      </div>
+      <div class="dash-user-badge">
+        <span id="dash-avatar">👤</span>
+        <select id="dash-selector-usuario" onchange="cambiarUsuario(this.value)">
+          <option value="">Seleccionar usuario</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Resumen rápido -->
+    <div class="dash-summary">
+      <div class="summary-card" id="summary-rutinas">
+        <span class="summary-icon">📋</span>
+        <div>
+          <span class="summary-count" id="count-rutinas">0</span>
+          <span class="summary-label">Rutinas hoy</span>
+        </div>
+      </div>
+      <div class="summary-card" id="summary-emociones">
+        <span class="summary-icon">💜</span>
+        <div>
+          <span class="summary-count" id="count-emociones">0</span>
+          <span class="summary-label">Emociones hoy</span>
+        </div>
+      </div>
+      <div class="summary-card" id="summary-recordatorios">
+        <span class="summary-icon">🔔</span>
+        <div>
+          <span class="summary-count" id="count-recordatorios">0</span>
+          <span class="summary-label">Recordatorios</span>
+        </div>
+      </div>
+      <div class="summary-card" id="summary-juegos">
+        <span class="summary-icon">⭐</span>
+        <div>
+          <span class="summary-count">2</span>
+          <span class="summary-label">Juegos</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Acceso rápido -->
+    <h2 class="dash-section-title">Acceso rápido</h2>
+    <div class="dash-actions">
+      <a href="/app/rutinas/formulario/formulario.html" class="action-card">
+        <span class="action-icon">📋</span>
+        <span class="action-label">Nueva rutina</span>
+      </a>
+      <a href="/app/emociones/registrar/registrar.html" class="action-card">
+        <span class="action-icon">💜</span>
+        <span class="action-label">Registrar emoción</span>
+      </a>
+      <a href="/app/recordatorios/crear/crear.html" class="action-card">
+        <span class="action-icon">🔔</span>
+        <span class="action-label">Crear recordatorio</span>
+      </a>
+      <a href="/app/horario/lista/lista.html" class="action-card">
+        <span class="action-icon">📅</span>
+        <span class="action-label">Ver horario</span>
+      </a>
+      <a href="/app/juegos/menu/menu.html" class="action-card">
+        <span class="action-icon">🎮</span>
+        <span class="action-label">Jugar</span>
+      </a>
+    </div>
+
+    <!-- Recordatorios próximos -->
+    <h2 class="dash-section-title">Próximos recordatorios</h2>
+    <div class="dash-reminders" id="dash-reminders">
+      <p class="empty-state" id="empty-reminders">No hay recordatorios pendientes ✨</p>
+      <div id="reminders-list"></div>
+    </div>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="/assets/js/storage.js"></script>
+  <script src="/assets/js/auth.js"></script>
+  <script src="/assets/js/app.js"></script>
+  <script src="inicio.js"></script>
+
+</body>
+</html>

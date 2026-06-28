@@ -1,142 +1,131 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <title>NAOMI MIRANDA RAFAEL</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeSync — Tu espacio de bienestar diario</title>
+  <meta name="description" content="LifeSync ayuda a estudiantes a organizar rutinas, expresar emociones y mantener el control de su día a día.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="index.css">
 </head>
-
 <body>
 
-    <center>
+  <!-- ====== NAVBAR ====== -->
+  <nav class="landing-nav">
+    <div class="nav-inner">
+      <div class="nav-logo">✨ LifeSync</div>
+      <div class="nav-links">
+        <a href="#features">Funciones</a>
+        <a href="#equipo">Equipo</a>
+        <a href="/app/inicio/inicio.html" class="nav-cta">Entrar</a>
+      </div>
+    </div>
+  </nav>
 
+  <!-- ====== HERO ====== -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-badge">🌟 Bienestar estudiantil</span>
+      <h1 class="hero-title">Organiza tu día,<br>expresa tus <span class="highlight">emociones</span></h1>
+      <p class="hero-subtitle">
+        LifeSync te ayuda a crear rutinas, registrar cómo te sientes
+        y mantener el control de tu vida académica y personal.
+      </p>
+      <div class="hero-ctas">
+        <a href="/app/inicio/inicio.html" class="btn-primary">✨ Comenzar ahora</a>
+        <a href="#features" class="btn-secondary">Conocer más</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-decor">
+        <div class="decor-card" style="top:0;left:0;">📅</div>
+        <div class="decor-card" style="top:40px;right:20px;">😊</div>
+        <div class="decor-card" style="bottom:0;right:0;">⏰</div>
+        <div class="decor-card" style="bottom:40px;left:20px;">🎮</div>
+      </div>
+    </div>
+  </section>
 
-        <!DOCTYPE html>
-        <html lang="es">
+  <!-- ====== FEATURES ====== -->
+  <section class="features" id="features">
+    <div class="section-header">
+      <h2>Todo lo que necesitas en un solo lugar</h2>
+      <p>Cinco herramientas diseñadas para tu bienestar diario</p>
+    </div>
 
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>LifeSync</title>
+    <div class="features-grid">
+      <a href="/app/rutinas/formulario/formulario.html" class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>Rutinas</h3>
+        <p>Organiza tus actividades diarias con horarios y recordatorios inteligentes.</p>
+      </a>
 
-            <style>
-                /* BODY: sirve para cambiar el fondo de toda la página */
-                body {
-                    margin: 0;
-                    padding: 0;
-                    font-family: Arial, Helvetica, sans-serif;
-                    background: linear-gradient(to right, #c084fc, #60a5fa, #34d399);
-                    height: 100vh;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
+      <a href="/app/emociones/registrar/registrar.html" class="feature-card">
+        <div class="feature-icon">💜</div>
+        <h3>Emociones</h3>
+        <p>Registra cómo te sientes cada día y recibe recomendaciones personalizadas.</p>
+      </a>
 
-                /* CONTENEDOR PRINCIPAL */
-                .contenedor {
-                    background-color: white;
-                    width: 75%;
-                    max-width: 900px;
-                    padding: 40px;
-                    border-radius: 25px;
-                    text-align: center;
-                    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25);
-                }
+      <a href="/app/recordatorios/crear/crear.html" class="feature-card">
+        <div class="feature-icon">🔔</div>
+        <h3>Recordatorios</h3>
+        <p>No olvides tus tareas importantes con avisos y niveles de prioridad.</p>
+      </a>
 
-                /* TÍTULO PRINCIPAL */
-                h1 {
-                    color: #7c3aed;
-                    font-size: 45px;
-                    margin-bottom: 10px;
-                }
+      <a href="/app/horario/lista/lista.html" class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>Horario</h3>
+        <p>Visualiza y gestiona tu semana completa de un vistazo.</p>
+      </a>
 
-                /* SUBTÍTULO */
-                h2 {
-                    color: #0f172a;
-                    font-size: 24px;
-                    margin-bottom: 30px;
-                }
+      <a href="/app/juegos/menu/menu.html" class="feature-card">
+        <div class="feature-icon">🎮</div>
+        <h3>Juegos</h3>
+        <p>Divierte mientras organizas tu día con minijuegos interactivos.</p>
+      </a>
+    </div>
+  </section>
 
-                /* PÁRRAFOS */
-                p {
-                    font-size: 18px;
-                    color: #374151;
-                }
+  <!-- ====== EQUIPO ====== -->
+  <section class="team" id="equipo">
+    <div class="section-header">
+      <h2>Hecho con 💜 por</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">👩‍💻</div>
+        <h4>Naomi Miranda Rafael</h4>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">👩‍💻</div>
+        <h4>Paola Pompa Rojas</h4>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">👩‍💻</div>
+        <h4>Kathe Cruz Caranza</h4>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">👩‍💻</div>
+        <h4>Angeles Ponce Ramirez</h4>
+      </div>
+    </div>
+  </section>
 
-                /* CAJA DE INTEGRANTES */
-                .integrantes {
-                    background-color: #f3e8ff;
-                    padding: 20px;
-                    border-radius: 20px;
-                    margin-top: 30px;
-                }
+  <!-- ====== CTA FINAL ====== -->
+  <section class="cta-final">
+    <div class="cta-inner">
+      <h2>¿Listo para empezar?</h2>
+      <p>Únete a LifeSync y transforma tu bienestar diario.</p>
+      <a href="/app/inicio/inicio.html" class="btn-primary btn-lg">✨ Comenzar ahora</a>
+    </div>
+  </section>
 
-                /* LISTA */
-                ul {
-                    list-style: none;
-                    padding: 0;
-                }
+  <!-- ====== FOOTER ====== -->
+  <footer class="landing-footer">
+    <p>LifeSync &copy; 2026 &mdash; Proyecto estudiantil</p>
+  </footer>
 
-                li {
-                    background-color: #ddd6fe;
-                    margin: 10px;
-                    padding: 12px;
-                    border-radius: 12px;
-                    font-weight: bold;
-                    color: #4c1d95;
-                }
-
-                /* BOTÓN */
-                button {
-                    margin-top: 25px;
-                    padding: 12px 25px;
-                    border: none;
-                    border-radius: 15px;
-                    background-color: #7c3aed;
-                    color: white;
-                    font-size: 16px;
-                    cursor: pointer;
-                    transition: 0.3s;
-                }
-
-                /* EFECTO DEL BOTÓN */
-                button:hover {
-                    background-color: #5b21b6;
-                    transform: scale(1.05);
-                }
-            </style>
-        </head>
-
-        <body>
-
-            <div class="contenedor">
-
-                <h1>LifeSync</h1>
-
-                <h2>Rutina Inteligente con Emociones</h2>
-
-                <p>
-                    Una plataforma diseñada para organizar tu rutina diaria,
-                    mejorar tus hábitos y ayudarte a expresar tus emociones.
-                </p>
-
-                <div class="integrantes">
-
-                    <h3>Integrantes del Grupo</h3>
-
-                    <ul>
-                        <li>CRUZ CARANZA,ASTRID </li>
-                        <li>MIRANDA RAFAEL,NAOMI </li>
-                        <li>POMPA ROJAS,PAOLA </li>
-                        <li>PONCE RAMIREZ,ANGELES </li>
-                    </ul>
-
-                </div>
-
-                <a href="inicio1.HTML">
-                    <button>💜 Ingresar</button>
-                </a>
-
-            </div>
-
-        </body>
-
-        </html>
+</body>
+</html>

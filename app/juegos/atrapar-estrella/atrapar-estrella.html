@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atrapa la Estrella — LifeSync</title>
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="atrapar-estrella.css">
+</head>
+<body>
+
+  <div class="fullscreen">
+    <h1 style="color:white;">⭐ Atrapa la Estrella ⭐</h1>
+    <p style="color:rgba(255,255,255,0.9);">Haz clic sobre la estrella todas las veces que puedas.</p>
+    <div class="score" id="puntos" style="color:white;">Puntos: 0</div>
+  </div>
+
+  <div id="estrella">⭐</div>
+
+  <a href="/app/juegos/menu/menu.html" class="btn-fixed-left">⬅ Juegos</a>
+  <a href="/app/juegos/dispara-objetivo/dispara-objetivo.html" class="btn-fixed">➡️ Siguiente</a>
+
+  <script>
+    let puntos = 0;
+    const estrella = document.getElementById("estrella");
+    const marcador = document.getElementById("puntos");
+
+    function moverEstrella() {
+      let x = Math.random() * (window.innerWidth - 100);
+      let y = Math.random() * (window.innerHeight - 100);
+      estrella.style.left = x + "px";
+      estrella.style.top = y + "px";
+    }
+
+    estrella.addEventListener("click", () => {
+      puntos++;
+      marcador.innerHTML = "Puntos: " + puntos;
+      moverEstrella();
+    });
+
+    moverEstrella();
+  </script>
+
+</body>
+</html>

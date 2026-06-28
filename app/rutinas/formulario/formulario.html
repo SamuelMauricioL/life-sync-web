@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rutinas — LifeSync</title>
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="formulario.css">
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <div class="contenedor">
+    <h1>📅 Mi Rutina Inteligente</h1>
+    <p>Programa tus actividades, organiza tus horarios y recibe recordatorios importantes.</p>
+
+    <form id="form-rutina">
+      <label>📌 Nombre de la actividad:</label>
+      <input type="text" id="actividad-nombre" placeholder="Ejemplo: Hacer tareas" required>
+
+      <label>📅 Fecha:</label>
+      <input type="date" id="actividad-fecha" required>
+
+      <label>⏰ Hora:</label>
+      <input type="time" id="actividad-hora" required>
+
+      <label>🔔 Tipo de recordatorio:</label>
+      <select id="actividad-recordatorio">
+        <option>10 minutos antes</option>
+        <option>30 minutos antes</option>
+        <option>1 hora antes</option>
+        <option>El mismo día</option>
+      </select>
+
+      <label>📝 Descripción:</label>
+      <textarea id="actividad-desc" rows="5" placeholder="Escribe detalles de tu actividad..."></textarea>
+
+      <button type="submit" class="btn btn-block">💜 Guardar Rutina</button>
+    </form>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="/assets/js/storage.js"></script>
+  <script src="/assets/js/app.js"></script>
+  <script>
+    document.getElementById('form-rutina').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const usuario = LifeSyncDB.getUsuarioActivo() || 'Invitado';
+      LifeSyncDB.addUserEntry(usuario, 'rutinas', {
+        nombre: document.getElementById('actividad-nombre').value,
+        fecha: document.getElementById('actividad-fecha').value,
+        hora: document.getElementById('actividad-hora').value,
+        recordatorio: document.getElementById('actividad-recordatorio').value,
+        descripcion: document.getElementById('actividad-desc').value
+      });
+      alert('✅ Rutina guardada exitosamente');
+      this.reset();
+    });
+  </script>
+
+</body>
+</html>

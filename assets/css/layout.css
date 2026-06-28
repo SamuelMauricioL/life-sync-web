@@ -1,0 +1,145 @@
+/* ============================================
+   LifeSync — Layout (Header, Nav, Footer, Grid)
+   ============================================ */
+
+/* Fondo gradiente para páginas de la app */
+body {
+  background: linear-gradient(to right, #8b5cf6, #3b82f6, #14b8a6);
+}
+
+/* ---------- CONTENEDOR PRINCIPAL ---------- */
+.contenedor {
+  width: 80%;
+  max-width: 950px;
+  margin: 40px auto;
+  background-color: var(--color-white);
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.contenedor-wide {
+  width: 85%;
+  max-width: 1100px;
+  margin: 40px auto;
+  background-color: var(--color-white);
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+
+.contenedor-narrow {
+  width: 75%;
+  max-width: 900px;
+  margin: 40px auto;
+  background-color: var(--color-white);
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+/* ---------- CENTER WRAPPER ---------- */
+.center-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+  background-color: var(--color-primary);
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-white);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.navbar-links a {
+  color: var(--color-white);
+  padding: 8px 16px;
+  border-radius: var(--radius-xs);
+  transition: background 0.3s;
+  font-size: 16px;
+}
+
+.navbar-links a:hover {
+  background-color: rgba(255,255,255,0.15);
+}
+
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(255,255,255,0.15);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+}
+
+/* ---------- FOOTER ---------- */
+.footer {
+  text-align: center;
+  padding: 25px;
+  color: var(--color-white);
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+/* ---------- FLEX HELPERS ---------- */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+
+/* ---------- PANTALLA COMPLETA ---------- */
+.fullscreen {
+  text-align: center;
+  color: var(--color-white);
+  padding-top: 20px;
+}
+
+/* ---------- CONTENEDOR FINAL (GRACIAS) ---------- */
+.final-card {
+  width: 70%;
+  max-width: 700px;
+  margin: 80px auto;
+  background-color: var(--color-white);
+  padding: 50px;
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+/* ---------- ALERTA ---------- */
+.alerta {
+  background-color: var(--color-primary-light);
+  padding: 20px;
+  border-radius: 18px;
+  margin-top: 30px;
+  text-align: center;
+  color: var(--color-primary-dark);
+  font-weight: bold;
+  font-size: 20px;
+}

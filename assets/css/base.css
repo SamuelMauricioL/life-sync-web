@@ -1,0 +1,76 @@
+/* ============================================
+   LifeSync — Base Styles (Reset + Variables)
+   ============================================ */
+
+:root {
+  /* Palette */
+  --color-primary: #7c3aed;
+  --color-primary-dark: #5b21b6;
+  --color-primary-light: #ede9fe;
+  --color-primary-hover: #ddd6fe;
+  --color-blue: #3b82f6;
+  --color-green: #10b981;
+  --color-teal: #14b8a6;
+  --color-dark: #0f172a;
+  --color-slate: #475569;
+  --color-text: #374151;
+  --color-muted: #1e293b;
+  --color-white: #ffffff;
+
+  /* Gradients */
+  --gradient-main: linear-gradient(to right, var(--color-primary), var(--color-blue), var(--color-green));
+  --gradient-alt: linear-gradient(to right, #8b5cf6, #3b82f6, #14b8a6);
+
+  /* Borders & Radius */
+  --radius-lg: 25px;
+  --radius-md: 15px;
+  --radius-sm: 12px;
+  --radius-xs: 10px;
+  --border-color: #c4b5fd;
+
+  /* Shadows */
+  --shadow-card: 0px 8px 20px rgba(0, 0, 0, 0.25);
+
+  /* Typography */
+  --font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+  --font-size-xl: 50px;
+  --font-size-lg: 45px;
+  --font-size-md: 24px;
+  --font-size-base: 18px;
+  --font-size-sm: 15px;
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background: #f8fafc;
+  min-height: 100vh;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
