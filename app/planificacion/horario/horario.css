@@ -1,0 +1,113 @@
+/* ============================================
+   LifeSync — Horario Semanal (planificacion/horario/)
+   ============================================ */
+
+.page-header h1 {
+  margin-bottom: 4px;
+}
+
+#semana-info {
+  font-size: 15px;
+  color: var(--color-slate);
+  font-weight: normal;
+}
+
+.horario-actions {
+  margin-bottom: 30px;
+}
+
+/* ---------- GRID SEMANAL ---------- */
+.horario-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .horario-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .horario-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.dia-col {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 14px;
+  min-height: 180px;
+}
+
+.dia-col.today {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-hover);
+}
+
+.dia-header {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-dark);
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--color-primary-light);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.dia-header small {
+  display: block;
+  font-weight: 400;
+  color: var(--color-slate);
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.dia-vacio {
+  text-align: center;
+  color: #cbd5e1;
+  font-size: 13px;
+  padding: 20px 0;
+}
+
+/* ---------- TARJETA DE TAREA EN HORARIO ---------- */
+.tarea-block {
+  background: var(--color-primary-light);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  cursor: default;
+  transition: transform 0.15s;
+  border-left: 4px solid var(--color-primary);
+}
+
+.tarea-block:hover {
+  transform: translateX(2px);
+}
+
+.tarea-block .tarea-hora {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  display: block;
+  margin-bottom: 3px;
+}
+
+.tarea-block .tarea-nombre {
+  color: var(--color-dark);
+  font-weight: 600;
+  display: block;
+}
+
+.tarea-block .tarea-cat {
+  font-size: 11px;
+  color: var(--color-slate);
+}
+
+.tarea-block.prio-alta  { border-left-color: #dc2626; }
+.tarea-block.prio-media { border-left-color: #a16207; }
+.tarea-block.prio-baja  { border-left-color: #16a34a; }

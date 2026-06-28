@@ -1,0 +1,124 @@
+/* ============================================
+   LifeSync — Historial Emocional (emociones/historial/)
+   ============================================ */
+
+/* ---------- TIMELINE ---------- */
+.timeline {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.timeline-day {
+  width: 110px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 20px 14px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.timeline-day:hover {
+  transform: translateY(-3px);
+}
+
+.timeline-day.today {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-hover);
+}
+
+.timeline-day .day-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-slate);
+  margin-bottom: 4px;
+}
+
+.timeline-day .day-date {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 12px;
+}
+
+.timeline-day .day-emoji {
+  font-size: 42px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.timeline-day .day-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-dark);
+}
+
+.timeline-day .day-empty {
+  font-size: 30px;
+  color: #e2e8f0;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.timeline-day .day-empty-label {
+  font-size: 12px;
+  color: #cbd5e1;
+}
+
+/* ---------- MOOD SUMMARY ---------- */
+.mood-summary {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.mood-summary .summary-stat {
+  flex: 1;
+  min-width: 120px;
+  text-align: center;
+}
+
+.mood-summary .summary-stat .stat-number {
+  display: block;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.mood-summary .summary-stat .stat-label {
+  font-size: 13px;
+  color: var(--color-slate);
+}
+
+/* ---------- MOOD INSIGHT ---------- */
+.mood-insight {
+  background: var(--color-primary-light);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.mood-insight h3 {
+  color: var(--color-primary-dark);
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.mood-insight p {
+  color: var(--color-slate);
+  font-size: 15px;
+}
+
+/* ---------- ACTIONS ---------- */
+.historial-actions {
+  text-align: center;
+}

@@ -29,17 +29,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Cargar conteos
   if (activo) {
-    const rutinas = LifeSyncDB.getUserData(activo, 'rutinas', []);
+    const tareas = LifeSyncDB.getUserData(activo, 'tareas', []);
     const hoyStr = hoy.toISOString().split('T')[0];
-    document.getElementById('count-rutinas').textContent =
-      rutinas.filter(r => r.fecha === hoyStr).length;
+    document.getElementById('count-tareas').textContent =
+      tareas.filter(t => t.fecha === hoyStr).length;
 
     const emociones = LifeSyncDB.getUserData(activo, 'emociones', []);
+    const hace7 = new Date(hoy);
+    hace7.setDate(hoy.getDate() - 7);
     document.getElementById('count-emociones').textContent =
-      emociones.filter(e => e.fecha === hoyStr).length;
-
-    const recordatorios = LifeSyncDB.getUserData(activo, 'recordatorios', []);
-    document.getElementById('count-recordatorios').textContent = recordatorios.length;
+      emociones.filter(e => new Date(e.fecha) >= hace7).length;
+    document.getElementById('count-historial').textContent =
+      emociones.length;
   }
 });
 

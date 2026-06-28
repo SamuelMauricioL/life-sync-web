@@ -23,11 +23,10 @@ const LifeSyncApp = {
         </div>
         <div class="navbar-links">
           <a href="/app/inicio/inicio.html">Inicio</a>
-          <a href="/app/rutinas/formulario/formulario.html">Rutinas</a>
+          <a href="/app/planificacion/tareas/tareas.html">Tareas</a>
+          <a href="/app/planificacion/horario/horario.html">Horario</a>
           <a href="/app/emociones/registrar/registrar.html">Emociones</a>
-          <a href="/app/recordatorios/crear/crear.html">Recordatorios</a>
-          <a href="/app/horario/lista/lista.html">Horario</a>
-          <a href="/app/juegos/menu/menu.html">Juegos</a>
+          <a href="/app/emociones/historial/historial.html">Historial</a>
           <a href="/equipo/about/about.html">Equipo</a>
         </div>
         <div class="navbar-user">

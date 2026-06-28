@@ -33,32 +33,32 @@
 
     <!-- Resumen rápido -->
     <div class="dash-summary">
-      <div class="summary-card" id="summary-rutinas">
+      <div class="summary-card" id="summary-tareas">
         <span class="summary-icon">📋</span>
         <div>
-          <span class="summary-count" id="count-rutinas">0</span>
-          <span class="summary-label">Rutinas hoy</span>
+          <span class="summary-count" id="count-tareas">0</span>
+          <span class="summary-label">Tareas hoy</span>
         </div>
       </div>
       <div class="summary-card" id="summary-emociones">
         <span class="summary-icon">💜</span>
         <div>
           <span class="summary-count" id="count-emociones">0</span>
-          <span class="summary-label">Emociones hoy</span>
+          <span class="summary-label">Emociones esta semana</span>
         </div>
       </div>
-      <div class="summary-card" id="summary-recordatorios">
-        <span class="summary-icon">🔔</span>
+      <div class="summary-card" id="summary-historial">
+        <span class="summary-icon">📊</span>
         <div>
-          <span class="summary-count" id="count-recordatorios">0</span>
-          <span class="summary-label">Recordatorios</span>
+          <span class="summary-count" id="count-historial">0</span>
+          <span class="summary-label">Días con registro</span>
         </div>
       </div>
-      <div class="summary-card" id="summary-juegos">
-        <span class="summary-icon">⭐</span>
+      <div class="summary-card" id="summary-horario">
+        <span class="summary-icon">📅</span>
         <div>
-          <span class="summary-count">2</span>
-          <span class="summary-label">Juegos</span>
+          <span class="summary-count">1</span>
+          <span class="summary-label">Horario</span>
         </div>
       </div>
     </div>
@@ -66,32 +66,28 @@
     <!-- Acceso rápido -->
     <h2 class="dash-section-title">Acceso rápido</h2>
     <div class="dash-actions">
-      <a href="/app/rutinas/formulario/formulario.html" class="action-card">
+      <a href="/app/planificacion/tareas/tareas.html" class="action-card">
         <span class="action-icon">📋</span>
-        <span class="action-label">Nueva rutina</span>
+        <span class="action-label">Nueva tarea</span>
+      </a>
+      <a href="/app/planificacion/horario/horario.html" class="action-card">
+        <span class="action-icon">📅</span>
+        <span class="action-label">Ver horario</span>
       </a>
       <a href="/app/emociones/registrar/registrar.html" class="action-card">
         <span class="action-icon">💜</span>
         <span class="action-label">Registrar emoción</span>
       </a>
-      <a href="/app/recordatorios/crear/crear.html" class="action-card">
-        <span class="action-icon">🔔</span>
-        <span class="action-label">Crear recordatorio</span>
-      </a>
-      <a href="/app/horario/lista/lista.html" class="action-card">
-        <span class="action-icon">📅</span>
-        <span class="action-label">Ver horario</span>
-      </a>
-      <a href="/app/juegos/menu/menu.html" class="action-card">
-        <span class="action-icon">🎮</span>
-        <span class="action-label">Jugar</span>
+      <a href="/app/emociones/historial/historial.html" class="action-card">
+        <span class="action-icon">📊</span>
+        <span class="action-label">Mi historial</span>
       </a>
     </div>
 
-    <!-- Recordatorios próximos -->
-    <h2 class="dash-section-title">Próximos recordatorios</h2>
+    <!-- Próximas tareas -->
+    <h2 class="dash-section-title">Próximas tareas</h2>
     <div class="dash-reminders" id="dash-reminders">
-      <p class="empty-state" id="empty-reminders">No hay recordatorios pendientes ✨</p>
+      <p class="empty-state" id="empty-reminders">No hay tareas pendientes ✨</p>
       <div id="reminders-list"></div>
     </div>
 
