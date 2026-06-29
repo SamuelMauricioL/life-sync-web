@@ -10,10 +10,7 @@ const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models
 const LifeSyncGemini = {
 
   getApiKey() {
-    const stored = localStorage.getItem(GEMINI_STORAGE_KEY);
-    if (stored) return stored;
-    // Key por defecto para el proyecto
-    return 'AIzaSyAAjHTbWpd9YTEsayhSFlnGaGIkGgJG0ao';
+    return localStorage.getItem(GEMINI_STORAGE_KEY) || '';
   },
 
   setApiKey(key) {
