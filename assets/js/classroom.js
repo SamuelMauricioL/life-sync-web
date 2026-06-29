@@ -4,8 +4,19 @@
  */
 
 const CLASSROOM_CONFIG_KEY = 'lifesync_classroom_config';
+const CLASSROOM_CONFIG_VERSION = 2;
 
 const ClassroomAPI = {
+
+  _init() {
+    // Limpiar configs viejas
+    const version = localStorage.getItem('lifesync_classroom_ver');
+    if (version !== String(CLASSROOM_CONFIG_VERSION)) {
+      localStorage.removeItem(CLASSROOM_CONFIG_KEY);
+      localStorage.removeItem('lifesync_classroom_token');
+      localStorage.setItem('lifesync_classroom_ver', String(CLASSROOM_CONFIG_VERSION));
+    }
+  },
 
   _config: null,
 
@@ -14,6 +25,8 @@ const ClassroomAPI = {
     const saved = localStorage.getItem(CLASSROOM_CONFIG_KEY);
     if (saved) {
       this._config = JSON.parse(saved);
+      // Siempre usar el redirectUri dinámico (el guardado puede estar desactualizado)
+      this._config.redirectUri = this._getRedirectUri();
       return this._config;
     }
     // Client ID por defecto para el proyecto
@@ -36,9 +49,7 @@ const ClassroomAPI = {
   },
 
   _getRedirectUri() {
-    // La URL actual sin el archivo, + oauth-callback.html
-    const base = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '');
-    return base + '/oauth-callback.html';
+    return window.location.origin + '/oauth-callback.html';
   },
 
   _getAccessToken() {
@@ -185,6 +196,9 @@ const ClassroomAPI = {
     return tareas;
   }
 };
+
+// Auto-limpiar config vieja al cargar
+ClassroomAPI._init();
 
 // Exponer para usar desde planificar.js
 window.ClassroomAPI = ClassroomAPI;
