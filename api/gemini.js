@@ -90,8 +90,11 @@ Máximo 5 pasos. Cada paso empieza con un verbo de acción: Revisa, Investiga, C
     const start = jsonStr.indexOf('{');
     const end = jsonStr.lastIndexOf('}');
     if (start === -1 || end === -1) {
-      console.error('No se encontró JSON en la respuesta:', rawText.substring(0, 200));
-      return res.status(502).json({ error: 'No se pudo parsear respuesta de Gemini' });
+      console.error('Gemini raw response:', rawText.substring(0, 500));
+      return res.status(502).json({ 
+        error: 'Gemini no devolvió JSON válido',
+        raw: rawText.substring(0, 300)
+      });
     }
     
     jsonStr = jsonStr.substring(start, end + 1);
