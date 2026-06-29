@@ -182,7 +182,7 @@ function renderProximasTareas() {
         <span class="task-item-icon">${catEmojis[t.categoria] || '📌'}</span>
         <div class="task-item-info">
           <strong>${t.nombre}</strong>
-          <small>${fechaLabel} · ${t.hora || '—'}</small>
+          <small>${fechaLabel} · ${t.hora || '—'} ${t.origen === 'google_classroom' ? '· 📚 Classroom' : ''}</small>
         </div>
         <span class="task-item-prio ${t.prioridad || 'media'}">
           ${t.prioridad === 'alta' ? '🔴' : t.prioridad === 'baja' ? '🟢' : '🟡'}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Conectando con Google Classroom...</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background: #f8fafc;
+      color: #475569;
+    }
+    .msg {
+      text-align: center;
+      padding: 40px;
+    }
+    .spinner {
+      font-size: 48px;
+      animation: spin 1s linear infinite;
+      display: block;
+      margin-bottom: 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="msg">
+    <span class="spinner">🔄</span>
+    <p>Conectando con LifeSync...</p>
+  </div>
+
+  <script>
+    // Leer el token del hash de la URL
+    const hash = window.location.hash.substring(1);
+    const params = new URLSearchParams(hash);
+    const token = params.get('access_token');
+    const error = params.get('error');
+
+    if (error) {
+      // Error: usuario denegó o falló
+      if (window.opener) {
+        window.opener.postMessage({ type: 'classroom-oauth', token: null }, window.location.origin);
+      }
+      document.querySelector('.msg').innerHTML = `
+        <p style="font-size:40px;">❌</p>
+        <p>No se pudo conectar. Cierra esta ventana e intenta de nuevo.</p>
+      `;
+    } else if (token) {
+      // Token recibido
+      if (window.opener) {
+        window.opener.postMessage({ type: 'classroom-oauth', token }, window.location.origin);
+      }
+      document.querySelector('.msg').innerHTML = `
+        <p style="font-size:40px;">✅</p>
+        <p>¡Conectado! Puedes cerrar esta ventana.</p>
+      `;
+      // Auto-cerrar después de 2 segundos
+      setTimeout(() => window.close(), 2000);
+    } else {
+      document.querySelector('.msg').innerHTML = `
+        <p style="font-size:40px;">⚠️</p>
+        <p>No se recibió ningún token. Intenta de nuevo.</p>
+      `;
+    }
+  </script>
+</body>
+</html>
