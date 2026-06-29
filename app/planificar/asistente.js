@@ -48,10 +48,10 @@ const AsistenteModal = {
         <span class="spinner">🤖</span>
         <p>Analizando tu tarea con Gemini...</p>
         <div class="loading-bar-container">
-          <div class="loading-step" id="step-1">◉ Analizando contenido de la tarea</div>
-          <div class="loading-step" id="step-2">◉ Identificando tipo de trabajo</div>
-          <div class="loading-step" id="step-3">◉ Generando ruta de estudio</div>
-          <div class="loading-step" id="step-4">◉ Preparando recomendaciones</div>
+          <div class="loading-step" id="step-1">◉ Leyendo tu tarea</div>
+          <div class="loading-step" id="step-2">◉ Entendiendo qué pide</div>
+          <div class="loading-step" id="step-3">◉ Armando la ruta</div>
+          <div class="loading-step" id="step-4">◉ Preparando tips</div>
         </div>
       </div>
     `;
@@ -89,12 +89,12 @@ const AsistenteModal = {
 
     body.innerHTML = `
       <div class="result-section">
-        <span class="section-label">🎯 Qué espera el profesor</span>
+        <span class="section-label">🎯 Qué espera el profe</span>
         <p>${analisis.queEspera || ''}</p>
       </div>
 
       <div class="result-section">
-        <span class="section-label">📋 Ruta sugerida</span>
+        <span class="section-label">📋 Paso a paso</span>
         <div class="progreso-bar">
           <div class="progreso-label">${completados}/${total} pasos completados</div>
           <div class="progreso-track">
@@ -113,7 +113,7 @@ const AsistenteModal = {
       </div>
 
       <div class="result-section">
-        <span class="section-label">💡 Tips de enfoque</span>
+        <span class="section-label">💡 Tips para brillar</span>
         <ul>
           ${(analisis.tips || []).map(t => `<li>${t}</li>`).join('')}
         </ul>
@@ -177,7 +177,7 @@ const AsistenteModal = {
     const existente = LifeSyncGemini.getAnalisisPorTareaId(usuario, tarea._id || tarea.id);
     if (!existente) return;
 
-    const texto = `📋 Plan de estudio: ${tarea.nombre || tarea.titulo}\n\n🎯 Qué espera el profesor:\n${existente.analisis.queEspera}\n\n📋 Ruta:\n${existente.analisis.ruta.map((p, i) => `${i + 1}. ${p}`).join('\n')}\n\n💡 Tips:\n${existente.analisis.tips.map(t => `• ${t}`).join('\n')}`;
+    const texto = `📋 Plan de estudio: ${tarea.nombre || tarea.titulo}\n\n🎯 Qué espera el profe:\n${existente.analisis.queEspera}\n\n📋 Paso a paso:\n${existente.analisis.ruta.map((p, i) => `${i + 1}. ${p}`).join('\n')}\n\n💡 Tips para brillar:\n${existente.analisis.tips.map(t => `• ${t}`).join('\n')}`;
 
     navigator.clipboard.writeText(texto).then(() => {
       const btn = event.target;
