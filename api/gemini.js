@@ -62,7 +62,7 @@ Máximo 5 pasos. Cada paso empieza con un verbo de acción: Revisa, Investiga, C
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
+          generationConfig: { temperature: 0.7, maxOutputTokens: 2048 }
         })
       }
     );
@@ -91,10 +91,7 @@ Máximo 5 pasos. Cada paso empieza con un verbo de acción: Revisa, Investiga, C
     const end = jsonStr.lastIndexOf('}');
     if (start === -1 || end === -1) {
       console.error('Gemini raw response:', rawText.substring(0, 500));
-      return res.status(502).json({ 
-        error: 'Gemini no devolvió JSON válido',
-        raw: rawText.substring(0, 300)
-      });
+      return res.status(502).json({ error: 'Gemini no devolvió JSON válido' });
     }
     
     jsonStr = jsonStr.substring(start, end + 1);
