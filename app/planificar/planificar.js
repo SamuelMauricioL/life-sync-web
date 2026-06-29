@@ -63,70 +63,8 @@ function abrirAsistente(tarea) {
 }
 
 // =============================================
-// GOOGLE CLASSROOM (simulación)
+// GOOGLE CLASSROOM (conexión real vía OAuth)
 // =============================================
-const MOCK_CLASSROOM_TAREAS = [
-  {
-    id: 'gc_1',
-    curso: 'Química II',
-    nombre: 'Reporte de laboratorio: Reacciones redox',
-    descripcion: 'Después del experimento en clase, redacta un reporte de laboratorio que incluya: objetivo, materiales, procedimiento, observaciones y conclusiones. Explica qué sustancia se oxidó y cuál se redujo, y cómo identificaste el cambio. Incluye dibujos o fotos de tus observaciones.',
-    fecha: new Date(Date.now() + 3 * 86400000).toISOString().split('T')[0],
-    hora: '23:59',
-    prioridad: 'alta',
-    categoria: 'estudio',
-    origen: 'google_classroom',
-    completada: false
-  },
-  {
-    id: 'gc_2',
-    curso: 'Matemáticas V',
-    nombre: 'Ejercicios: Límites al infinito',
-    descripcion: 'Resuelve los ejercicios 1 al 10 de la página 142 del libro de Cálculo. Calcula los límites al infinito de cada función racional. Identifica asíntotas horizontales cuando existan. Muestra el desarrollo completo, no solo el resultado.',
-    fecha: new Date(Date.now() + 5 * 86400000).toISOString().split('T')[0],
-    hora: '23:59',
-    prioridad: 'media',
-    categoria: 'estudio',
-    origen: 'google_classroom',
-    completada: false
-  },
-  {
-    id: 'gc_3',
-    curso: 'Literatura Universal',
-    nombre: 'Ensayo: El mito del héroe en La Odisea',
-    descripcion: 'Lee los cantos IX al XII de La Odisea de Homero. Escribe un ensayo de 2 cuartillas donde analices el viaje de Odiseo como una metáfora del crecimiento personal. Identifica al menos 3 pruebas que enfrenta y explica qué representan. Relaciona el concepto del "héroe clásico" con algún ejemplo moderno.',
-    fecha: new Date(Date.now() + 7 * 86400000).toISOString().split('T')[0],
-    hora: '23:59',
-    prioridad: 'alta',
-    categoria: 'estudio',
-    origen: 'google_classroom',
-    completada: false
-  },
-  {
-    id: 'gc_4',
-    curso: 'Física II',
-    nombre: 'Problemas: Ley de Coulomb',
-    descripcion: 'Resuelve los problemas de la guía (páginas 28-31) sobre fuerza electrostática. Calcula la fuerza entre cargas puntuales usando la Ley de Coulomb. Determina dirección y magnitud de la fuerza resultante en sistemas de 2 y 3 cargas. Dibuja los diagramas de cuerpo libre.',
-    fecha: new Date(Date.now() + 2 * 86400000).toISOString().split('T')[0],
-    hora: '23:59',
-    prioridad: 'alta',
-    categoria: 'estudio',
-    origen: 'google_classroom',
-    completada: false
-  },
-  {
-    id: 'gc_5',
-    curso: 'Historia Universal',
-    nombre: 'Línea del tiempo: Guerras Mundiales',
-    descripcion: 'Elabora una línea del tiempo comparativa de la Primera y Segunda Guerra Mundial. Incluye: causas, eventos principales (mínimo 8 por guerra), personajes clave, consecuencias. Puedes hacerlo en formato digital (Canva, PowerPoint) o en cartulina. Se evaluará claridad visual y precisión de fechas.',
-    fecha: new Date(Date.now() + 10 * 86400000).toISOString().split('T')[0],
-    hora: '23:59',
-    prioridad: 'media',
-    categoria: 'estudio',
-    origen: 'google_classroom',
-    completada: false
-  }
-];
 
 async function conectarClassroom() {
   const btn = document.getElementById('btn-conectar-classroom');
@@ -135,63 +73,48 @@ async function conectarClassroom() {
 
   const usuario = LifeSyncDB.getUsuarioActivo() || 'Invitado';
 
-  // Intentar OAuth real si hay Client ID configurado
-  if (ClassroomAPI.isConfigured()) {
-    try {
-      const token = await ClassroomAPI.iniciarOAuth();
-      if (!token) throw new Error('No token');
+  try {
+    const token = await ClassroomAPI.iniciarOAuth();
+    if (!token) throw new Error('No token');
 
-      btn.textContent = '📥 Importando tareas...';
-      const tareas = await ClassroomAPI.importarTareas();
+    btn.textContent = '📥 Importando tareas...';
+    const tareas = await ClassroomAPI.importarTareas();
 
-      if (tareas.length === 0) {
-        alert('No se encontraron tareas con fecha de entrega en tus cursos.');
-        btn.textContent = '🔗 Conectar Classroom';
-        btn.disabled = false;
-        return;
-      }
-
-      // Guardar tareas
-      tareas.forEach(t => {
-        const existentes = LifeSyncDB.getUserData(usuario, 'tareas', []);
-        if (!existentes.some(e => e.id === t.id)) {
-          LifeSyncDB.addUserEntry(usuario, 'tareas', t);
-        }
-      });
-
-      btn.textContent = '✅ Conectado';
-      btn.style.background = '#16a34a';
-      btn.style.borderColor = '#16a34a';
-      btn.style.color = '#fff';
-
-      renderClassroomTareas();
-      renderSemana();
+    if (tareas.length === 0) {
+      alert('No se encontraron tareas con fecha de entrega en tus cursos.');
+      btn.textContent = '🔗 Conectar Classroom';
+      btn.disabled = false;
       return;
-    } catch (err) {
-      console.warn('OAuth falló, usando modo simulado:', err.message);
-      ClassroomAPI.clearToken();
-      // Fall through to mock
     }
-  }
 
-  // Fallback: datos mock de 5to de secundaria
-  setTimeout(() => {
-    MOCK_CLASSROOM_TAREAS.forEach(t => {
-      const existentes = LifeSyncDB.getUserData(usuario, 'tareas', []);
-      if (!existentes.some(e => e.id === t.id)) {
-        LifeSyncDB.addUserEntry(usuario, 'tareas', t);
+    const existentes = LifeSyncDB.getUserData(usuario, 'tareas', []);
+    let nuevas = 0;
+    tareas.forEach(t => {
+      const duplicado = existentes.some(e =>
+        e.id === t.id ||
+        (e.nombre === t.nombre && e.fecha === t.fecha && e.curso === t.curso)
+      );
+      if (!duplicado) {
+        existentes.push(t);
+        nuevas++;
       }
     });
+    LifeSyncDB.setUserData(usuario, 'tareas', existentes);
+    console.log(`📥 Classroom: ${nuevas} nuevas, ${tareas.length - nuevas} duplicadas omitidas`);
 
-    btn.textContent = '✅ Conectado (demo)';
+    btn.textContent = '✅ Conectado';
     btn.style.background = '#16a34a';
     btn.style.borderColor = '#16a34a';
     btn.style.color = '#fff';
-    btn.disabled = false;
 
     renderClassroomTareas();
     renderSemana();
-  }, 1500);
+  } catch (err) {
+    console.error('Error al conectar con Classroom:', err);
+    btn.textContent = '🔗 Conectar Classroom';
+    btn.disabled = false;
+    alert('Error al conectar: ' + err.message);
+  }
 }
 
 function renderClassroomTareas() {
