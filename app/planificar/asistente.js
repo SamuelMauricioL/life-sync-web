@@ -20,12 +20,6 @@ const AsistenteModal = {
 
     const body = document.getElementById('asistente-body');
 
-    // Verificar si ya tiene API key
-    if (!LifeSyncGemini.hasKey()) {
-      this._renderApiKeyForm(body);
-      return;
-    }
-
     // Verificar si ya fue analizada
     const usuario = LifeSyncDB.getUsuarioActivo() || 'Invitado';
     const existente = LifeSyncGemini.getAnalisisPorTareaId(usuario, tarea._id || tarea.id);
@@ -42,29 +36,6 @@ const AsistenteModal = {
     document.getElementById('asistente-overlay').style.display = 'none';
     this._tareaActual = null;
     if (this._onClose) this._onClose();
-  },
-
-  _renderApiKeyForm(body) {
-    body.innerHTML = `
-      <div class="api-key-section">
-        <h4>🔑 Configurar Gemini</h4>
-        <p>Para usar el planificador con IA necesitas una API key de Google Gemini. Es gratuita.</p>
-        <input type="text" id="gemini-key-input" placeholder="Pega tu API key aquí" />
-        <button class="btn" onclick="AsistenteModal._guardarKey()">💜 Guardar</button>
-        <div class="api-key-help">
-          ¿No tienes una? <a href="https://aistudio.google.com/apikey" target="_blank">Obtén una gratis en Google AI Studio</a><br>
-          Sin tarjeta de crédito · 60 requests/minuto gratis
-        </div>
-      </div>
-    `;
-  },
-
-  _guardarKey() {
-    const key = document.getElementById('gemini-key-input').value.trim();
-    if (!key) return;
-    LifeSyncGemini.setApiKey(key);
-    const body = document.getElementById('asistente-body');
-    this._analizar(body);
   },
 
   async _analizar(body) {
@@ -97,29 +68,15 @@ const AsistenteModal = {
 
       this._renderResultado(body, analisis);
     } catch (err) {
-      if (err.message === 'API_KEY_MISSING') {
-        this._renderApiKeyForm(body);
-      } else if (err.message === 'API_KEY_INVALID') {
-        body.innerHTML = `
-          <div class="error-state">
-            <span class="error-icon">❌</span>
-            <p>La API key no es válida o ha expirado.<br>Verifícala e intenta de nuevo.</p>
-            <button class="btn" onclick="AsistenteModal._renderApiKeyForm(document.getElementById('asistente-body'))">
-              🔑 Cambiar API key
-            </button>
-          </div>
-        `;
-      } else {
-        body.innerHTML = `
-          <div class="error-state">
-            <span class="error-icon">⚠️</span>
-            <p>Hubo un error al conectar con Gemini.<br>Revisa tu conexión e intenta de nuevo.</p>
-            <button class="btn" onclick="AsistenteModal._analizar(document.getElementById('asistente-body'))">
-              🔄 Reintentar
-            </button>
-          </div>
-        `;
-      }
+      body.innerHTML = `
+        <div class="error-state">
+          <span class="error-icon">⚠️</span>
+          <p>Hubo un error al analizar la tarea.<br>${err.message}</p>
+          <button class="btn" onclick="AsistenteModal._analizar(document.getElementById('asistente-body'))">
+            🔄 Reintentar
+          </button>
+        </div>
+      `;
     }
   },
 
