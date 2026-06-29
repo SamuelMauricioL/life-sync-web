@@ -80,13 +80,22 @@ Máximo 5 pasos. Cada paso empieza con un verbo de acción: Revisa, Investiga, C
       return res.status(502).json({ error: 'Respuesta vacía de Gemini' });
     }
 
-    // Extraer JSON
-    const jsonMatch = rawText.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) {
+    // Extraer JSON - manejar markdown ```json ... ``` y texto suelto
+    let jsonStr = rawText.trim();
+    
+    // Quitar bloques de código markdown
+    jsonStr = jsonStr.replace(/```json\s*/gi, '').replace(/```\s*$/gm, '').trim();
+    
+    // Buscar el primer { y último }
+    const start = jsonStr.indexOf('{');
+    const end = jsonStr.lastIndexOf('}');
+    if (start === -1 || end === -1) {
+      console.error('No se encontró JSON en la respuesta:', rawText.substring(0, 200));
       return res.status(502).json({ error: 'No se pudo parsear respuesta de Gemini' });
     }
-
-    const analisis = JSON.parse(jsonMatch[0]);
+    
+    jsonStr = jsonStr.substring(start, end + 1);
+    const analisis = JSON.parse(jsonStr);
     return res.status(200).json(analisis);
 
   } catch (err) {
