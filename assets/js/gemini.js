@@ -10,6 +10,11 @@ const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models
 const LifeSyncGemini = {
 
   getApiKey() {
+    // 1. Key inyectada por Vercel en build
+    if (window.__CONFIG__?.GEMINI_API_KEY) {
+      return window.__CONFIG__.GEMINI_API_KEY;
+    }
+    // 2. Key guardada por el usuario en localStorage
     return localStorage.getItem(GEMINI_STORAGE_KEY) || '';
   },
 
