@@ -3,7 +3,14 @@
  * Proxy para Gemini API. La API key nunca sale del servidor.
  */
 export default async function handler(req, res) {
-  // Solo aceptar POST
+  // GET: devolver config del frontend (Google Client ID)
+  if (req.method === 'GET') {
+    return res.status(200).json({
+      googleClientId: process.env.GOOGLE_CLIENT_ID || ''
+    });
+  }
+
+  // Solo aceptar POST para el análisis
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }

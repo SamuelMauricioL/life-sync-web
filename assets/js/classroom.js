@@ -1,12 +1,15 @@
 /**
  * LifeSync — Google Classroom OAuth + API Client
  * Conexión real con Google Classroom vía OAuth 2.0.
+ * El Client ID se obtiene desde el servidor (env var GOOGLE_CLIENT_ID).
  */
 
 const CLASSROOM_CONFIG_KEY = 'lifesync_classroom_config';
-const CLASSROOM_CONFIG_VERSION = 2;
+const CLASSROOM_CONFIG_VERSION = 3;
 
 const ClassroomAPI = {
+
+  _config: null,
 
   _init() {
     // Limpiar configs viejas
@@ -16,26 +19,31 @@ const ClassroomAPI = {
       localStorage.removeItem('lifesync_classroom_token');
       localStorage.setItem('lifesync_classroom_ver', String(CLASSROOM_CONFIG_VERSION));
     }
+    // Cargar Client ID desde el servidor
+    this._cargarClientId();
   },
 
-  _config: null,
+  async _cargarClientId() {
+    try {
+      const res = await fetch('/api/gemini');
+      const data = await res.json();
+      if (data.googleClientId) {
+        this.setConfig(data.googleClientId);
+      }
+    } catch (e) {
+      console.warn('No se pudo obtener Google Client ID del servidor');
+    }
+  },
 
   getConfig() {
     if (this._config) return this._config;
     const saved = localStorage.getItem(CLASSROOM_CONFIG_KEY);
     if (saved) {
       this._config = JSON.parse(saved);
-      // Siempre usar el redirectUri dinámico (el guardado puede estar desactualizado)
       this._config.redirectUri = this._getRedirectUri();
       return this._config;
     }
-    // Client ID por defecto para el proyecto
-    const defaultConfig = {
-      clientId: '1023983567101-nrh1kpja2gjen0k4o5mpp5kj1fp0p19c.apps.googleusercontent.com',
-      redirectUri: this._getRedirectUri()
-    };
-    this._config = defaultConfig;
-    return this._config;
+    return null;
   },
 
   setConfig(clientId) {
@@ -68,7 +76,7 @@ const ClassroomAPI = {
   iniciarOAuth() {
     const config = this.getConfig();
     if (!config) {
-      alert('Configura tu Client ID de Google primero.');
+      alert('El Client ID de Google Classroom no está configurado. Contacta al administrador.');
       return;
     }
 
@@ -84,14 +92,12 @@ const ClassroomAPI = {
 
     const url = `https://accounts.google.com/o/oauth2/v2/auth?${params}`;
 
-    // Abrir popup centrado
     const w = 600, h = 700;
     const left = (screen.width / 2) - (w / 2);
     const top = (screen.height / 2) - (h / 2);
     const popup = window.open(url, 'google-oauth',
       `width=${w},height=${h},top=${top},left=${left}`);
 
-    // Escuchar el token desde el popup
     return new Promise((resolve, reject) => {
       const handler = (event) => {
         if (event.origin !== window.location.origin) return;
@@ -106,8 +112,6 @@ const ClassroomAPI = {
         }
       };
       window.addEventListener('message', handler);
-
-      // Timeout por si el usuario cierra el popup
       setTimeout(() => {
         window.removeEventListener('message', handler);
         reject(new Error('Timeout'));
@@ -115,7 +119,6 @@ const ClassroomAPI = {
     });
   },
 
-  // Obtener cursos del alumno
   async getCourses() {
     const token = this._getAccessToken();
     if (!token) throw new Error('NO_TOKEN');
@@ -127,10 +130,7 @@ const ClassroomAPI = {
     );
 
     if (!res.ok) {
-      if (res.status === 401) {
-        this.clearToken();
-        throw new Error('TOKEN_EXPIRED');
-      }
+      if (res.status === 401) { this.clearToken(); throw new Error('TOKEN_EXPIRED'); }
       throw new Error('API_ERROR');
     }
 
@@ -138,7 +138,6 @@ const ClassroomAPI = {
     return data.courses || [];
   },
 
-  // Obtener tareas de un curso
   async getCourseWork(courseId) {
     const token = this._getAccessToken();
     if (!token) throw new Error('NO_TOKEN');
@@ -150,10 +149,7 @@ const ClassroomAPI = {
     );
 
     if (!res.ok) {
-      if (res.status === 401) {
-        this.clearToken();
-        throw new Error('TOKEN_EXPIRED');
-      }
+      if (res.status === 401) { this.clearToken(); throw new Error('TOKEN_EXPIRED'); }
       throw new Error('API_ERROR');
     }
 
@@ -161,7 +157,6 @@ const ClassroomAPI = {
     return data.courseWork || [];
   },
 
-  // Importar todas las tareas de todos los cursos
   async importarTareas() {
     const cursos = await this.getCourses();
     let tareas = [];
@@ -169,15 +164,12 @@ const ClassroomAPI = {
     for (const curso of cursos) {
       const courseWork = await this.getCourseWork(curso.id);
       for (const t of courseWork) {
-        // Solo tareas que tienen fecha de entrega
         if (!t.dueDate) continue;
-
         const dueDate = `${t.dueDate.year}-${String(t.dueDate.month).padStart(2, '0')}-${String(t.dueDate.day).padStart(2, '0')}`;
         let dueTime = '';
         if (t.dueTime) {
           dueTime = `${String(t.dueTime.hours || 0).padStart(2, '0')}:${String(t.dueTime.minutes || 0).padStart(2, '0')}`;
         }
-
         tareas.push({
           id: `classroom_${t.id}`,
           curso: curso.name,
@@ -197,8 +189,5 @@ const ClassroomAPI = {
   }
 };
 
-// Auto-limpiar config vieja al cargar
 ClassroomAPI._init();
-
-// Exponer para usar desde planificar.js
 window.ClassroomAPI = ClassroomAPI;
