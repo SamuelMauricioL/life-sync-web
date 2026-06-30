@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Empezar — LifeSync</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #7c3aed, #3b82f6, #14b8a6);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 48px 40px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .card-icon {
+      font-size: 56px;
+      margin-bottom: 16px;
+    }
+    .card h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+    .card p {
+      font-size: 15px;
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .card input {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #e2e8f0;
+      border-radius: 14px;
+      font-size: 16px;
+      font-family: inherit;
+      text-align: center;
+      transition: border-color 0.2s;
+      margin-bottom: 16px;
+    }
+    .card input:focus {
+      border-color: #7c3aed;
+      outline: none;
+    }
+    .card button {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #7c3aed, #6d28d9);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 14px rgba(124,58,237,0.3);
+    }
+    .card button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(124,58,237,0.4);
+    }
+    .card button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .integrantes-sugeridos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .integrantes-sugeridos button {
+      all: unset;
+      padding: 8px 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      font-size: 13px;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      width: auto;
+      background: none;
+      box-shadow: none;
+    }
+    .integrantes-sugeridos button:hover {
+      border-color: #7c3aed;
+      color: #7c3aed;
+      background: #ede9fe;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="card-icon">👋</div>
+    <h1>¿Quién eres?</h1>
+    <p>Escribe tu nombre para empezar a usar LifeSync.<br>Bienvenido seas! 💜</p>
+
+    <input type="text" id="nombre-input" placeholder="Escribe tu nombre aquí" autocomplete="off">
+
+    <button id="btn-continuar" disabled onclick="continuar()">✨ Continuar</button>
+
+    <div class="integrantes-sugeridos">
+      <button onclick="seleccionar('Naomi Miranda Rafael')">Naomi</button>
+      <button onclick="seleccionar('Paola Pompa Rojas')">Paola</button>
+      <button onclick="seleccionar('Kathe Cruz Caranza')">Kathe</button>
+      <button onclick="seleccionar('Angeles Ponce Ramirez')">Angeles</button>
+    </div>
+  </div>
+
+  <script src="/assets/js/storage.js"></script>
+  <script>
+    const input = document.getElementById('nombre-input');
+    const btn = document.getElementById('btn-continuar');
+
+    input.addEventListener('input', function() {
+      btn.disabled = !this.value.trim();
+    });
+
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && this.value.trim()) continuar();
+    });
+
+    function seleccionar(nombre) {
+      input.value = nombre;
+      btn.disabled = false;
+      continuar();
+    }
+
+    function continuar() {
+      const nombre = input.value.trim();
+      if (!nombre) return;
+
+      // Guardar usuario
+      let usuarios = LifeSyncDB.getUsuarios();
+      if (!usuarios.includes(nombre)) {
+        LifeSyncDB.addUsuario(nombre);
+      }
+      LifeSyncDB.setUsuarioActivo(nombre);
+
+      window.location.href = '/app/inicio/inicio.html';
+    }
+  </script>
+
+</body>
+</html>
